@@ -1,0 +1,6 @@
+App\Entity\PlanedRide:
+    PlanedRide{0..50}:
+        organizer: '@User*'
+        region: '<region()>'
+        city: '<city()>'
+        gpx: '<file($sourceDir = "/gpx", $targetDir = "/gpx")>'
