@@ -6,8 +6,8 @@ App\Entity\User:
         region: '<region()>'
         city: '<city()>'
         passHash: '<password()>'
-        bikeType: '@BikeType*'
-        drivingStyle: '<randomElement(["Grand débile", "Enervé", "Propre", "Ballade", "Poireau"])>'
-        description: '<sentence($nbWords = 6, $variableNbWords = true)>'
+        bikeType: ['@BikeType*']
+        drivingStyle: '<numberBetween(0,6)>'
+        description: '<sentence(6, true)>'
         startTime: '<dateTimeBetween("+2 days", "+2 months")>'
-        duration: '<time($format = "H", $max = "8")>'
+        duration: '<numberBetween(1,8)>'

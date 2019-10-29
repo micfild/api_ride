@@ -3,4 +3,4 @@ App\Entity\PlanedRide:
         organizer: '@User*'
         region: '<region()>'
         city: '<city()>'
-        gpx: '<file($sourceDir = "/gpx", $targetDir = "/gpx")>'
+        gpx: '/gpx/file<current()>.gpx'
