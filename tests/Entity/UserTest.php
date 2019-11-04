@@ -5,6 +5,8 @@ namespace App\Tests\Entity;
 use App\Entity\User;
 use App\Entity\BikeType;
 use PHPUnit\Framework\TestCase;
+use stdClass;
+use TypeError;
 
 class UserTest extends TestCase
 {
@@ -22,8 +24,8 @@ class UserTest extends TestCase
         $user->setFirstName($name);
         $this->assertSame($name, $user->getFirstName());
 
-        $this->expectException(\TypeError::class);
-        $user->setFirstName(new \stdClass());
+        $this->expectException(TypeError::class);
+        $user->setFirstName(new stdClass());
     }
 
     /**
@@ -40,8 +42,8 @@ class UserTest extends TestCase
         $user->setLastName($name);
         $this->assertSame($name, $user->getLastName());
 
-        $this->expectException(\TypeError::class);
-        $user->setLastName(new \stdClass());
+        $this->expectException(TypeError::class);
+        $user->setLastName(new stdClass());
     }
 
     /**
@@ -49,7 +51,7 @@ class UserTest extends TestCase
      *
      * @dataProvider getTypeTests
      */
-    public function TestGetSetBikeType(BikeType $bikeType)
+    public function testGetSetBikeType(BikeType $bikeType)
     {
         $user = new User();
         $this->assertInstanceOf(User::class, $user);
@@ -86,7 +88,9 @@ class UserTest extends TestCase
 
     public function getTypeTests()
     {
-        return new BikeType();
+        return [
+            [new BikeType()],
+        ];
     }
 
 }

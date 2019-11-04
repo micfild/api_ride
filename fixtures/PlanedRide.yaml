@@ -4,3 +4,5 @@ App\Entity\PlanedRide:
         region: '<region()>'
         city: '<city()>'
         gpx: '/gpx/file<current()>.gpx'
+        startTime: '<dateTimeBetween("+2 days", "+2 months")>'
+        duration: '<numberBetween(1,8)>'

@@ -4,9 +4,13 @@ namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
- * @ApiResource()
+ * @ApiResource(
+ *     normalizationContext={"groups"={"read"}},
+ *     denormalizationContext={"groups"={"write"}}
+ * )
  * @ORM\Entity(repositoryClass="App\Repository\PlanedRideRepository")
  */
 class PlanedRide
@@ -15,29 +19,46 @@ class PlanedRide
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
+     * @Groups({"read"})
      */
     private $id;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\User")
      * @ORM\JoinColumn(nullable=false)
+     * @Groups({"read", "write"})
      */
     private $organizer;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"read", "write"})
      */
     private $region;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"read", "write"})
      */
     private $city;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups({"read", "write"})
      */
     private $gpx;
+
+    /**
+     * @ORM\Column(type="datetime")
+     * @Groups({"read", "write"})
+     */
+    private $StartTime;
+
+    /**
+     * @ORM\Column(type="integer")
+     * @Groups({"read", "write"})
+     */
+    private $duration;
 
     public function getId(): ?int
     {
@@ -88,6 +109,30 @@ class PlanedRide
     public function setGpx(?string $gpx): self
     {
         $this->gpx = $gpx;
+
+        return $this;
+    }
+
+    public function getStartTime(): ?\DateTimeInterface
+    {
+        return $this->StartTime;
+    }
+
+    public function setStartTime(\DateTimeInterface $StartTime): self
+    {
+        $this->StartTime = $StartTime;
+
+        return $this;
+    }
+
+    public function getDuration(): ?int
+    {
+        return $this->duration;
+    }
+
+    public function setDuration(int $duration): self
+    {
+        $this->duration = $duration;
 
         return $this;
     }
